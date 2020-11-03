@@ -10,11 +10,11 @@ export default function Routes() {
       <Route exact path="/">
         <Home />
       </Route>
-      <Route>
-        <NotFound />
-      </Route>
       <Route exact path="/login">
         <Login />
+      </Route>
+      <Route>
+        <NotFound />
       </Route>
     </Switch>
   );
