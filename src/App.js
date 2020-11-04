@@ -1,20 +1,45 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useHistory } from "react-router-dom";
 import { Nav, Navbar, NavItem } from "react-bootstrap";
 import "./App.css";
 import Routes from "./Routes";
 import { LinkContainer } from "react-router-bootstrap";
 import { AppContext } from "./libs/contextLib";
-
+import { Auth } from "aws-amplify";
 
 function App() {
-  function handleLogout() {
-    userHasAuthenticated(false);
+  const [isAuthenticating, setIsAuthenticating] = useState(true);
+  const [isAuthenticated, userHasAuthenticated] = useState(false);
+  const history = useHistory();
+
+  useEffect(() => {
+    onLoad();
+  }, []);
+
+  async function onLoad() {
+    try {
+      await Auth.currentSession();
+      userHasAuthenticated(true);
+    }
+    catch (e) {
+      if (e !== 'No current user') {
+        alert(e);
+      }
+    }
+
+    setIsAuthenticating(false);
   }
 
-  const [isAuthenticated, userHasAuthenticated] = useState(false);
-  
+  async function handleLogout() {
+    await Auth.signOut();
+
+    userHasAuthenticated(false);
+    history.push("/login");
+  }
+
+
   return (
+    !isAuthenticating &&
     <div className="App container">
       <Navbar fluid collapseOnSelect>
         <Navbar.Header>
@@ -39,7 +64,9 @@ function App() {
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-      <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated }}>
+      <AppContext.Provider
+        value={{ isAuthenticated, userHasAuthenticated }}
+      >
         <Routes />
       </AppContext.Provider>
     </div>
