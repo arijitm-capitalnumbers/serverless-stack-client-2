@@ -1,9 +1,5 @@
 import React, { useState } from "react";
-import { FormGroup, FormControl, ControlLabel, Form } from "react-bootstrap";
-// import { Form } from 'react-bootstrap';
-// import { Form } from "react-bootstrap/Form";
-import FormText from "react-bootstrap/FormText";
-import FormLabel from "react-bootstrap/FormLabel";
+import { Form } from 'react-bootstrap';
 import { useHistory } from "react-router-dom";
 import LoaderButton from "../components/LoaderButton";
 import { useAppContext } from "../libs/contextLib";
@@ -54,16 +50,16 @@ export default function Signup() {
   function renderConfirmationForm() {
     return (
       <Form onSubmit={handleConfirmationSubmit}>
-        <FormGroup controlId="confirmationCode" size="lg">
-          <FormLabel>Confirmation Code</FormLabel>
-          <FormControl
+        <Form.Group controlId="confirmationCode" size="lg">
+          <Form.Label>Confirmation Code</Form.Label>
+          <Form.Control
             autoFocus
             type="tel"
             onChange={handleFieldChange}
             value={fields.confirmationCode}
           />
-          <FormText muted>Please check your email for the code.</FormText>
-        </FormGroup>
+          <Form.Text muted>Please check your email for the code.</Form.Text>
+        </Form.Group>
         <LoaderButton
           block
           size="lg"
@@ -81,31 +77,31 @@ export default function Signup() {
   function renderForm() {
     return (
       <Form onSubmit={handleSubmit}>
-        <FormGroup controlId="email" size="lg">
-          <FormLabel>Email</FormLabel>
-          <FormControl
+        <Form.Group controlId="email" size="lg">
+          <Form.Label>Email</Form.Label>
+          <Form.Control
             autoFocus
             type="email"
             value={fields.email}
             onChange={handleFieldChange}
           />
-        </FormGroup>
-        <FormGroup controlId="password" size="lg">
-          <FormLabel>Password</FormLabel>
-          <FormControl
+        </Form.Group>
+        <Form.Group controlId="password" size="lg">
+          <Form.Label>Password</Form.Label>
+          <Form.Control
             type="password"
             value={fields.password}
             onChange={handleFieldChange}
           />
-        </FormGroup>
-        <FormGroup controlId="confirmPassword" size="lg">
-          <FormLabel>Confirm Password</FormLabel>
-          <FormControl
+        </Form.Group>
+        <Form.Group controlId="confirmPassword" size="lg">
+          <Form.Label>Confirm Password</Form.Label>
+          <Form.Control
             type="password"
             onChange={handleFieldChange}
             value={fields.confirmPassword}
           />
-        </FormGroup>
+        </Form.Group>
         <LoaderButton
           block
           size="lg"

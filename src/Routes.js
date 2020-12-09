@@ -14,11 +14,11 @@ export default function Routes() {
       <Route exact path="/login">
         <Login />
       </Route>
-      <Route>
-        <NotFound />
-      </Route>
       <Route exact path="/signup">
         <Signup />
+      </Route>
+      <Route>
+        <NotFound />
       </Route>
     </Switch>
   );
